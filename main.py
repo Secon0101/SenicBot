@@ -3,11 +3,12 @@ from discord.ext import commands
 from utility import get_cogs, log
 
 
-bot = commands.Bot(command_prefix='$', owner_id=540481950763319317, intents=discord.Intents.all())
+bot = commands.Bot(command_prefix='$', owner_id=540481950763319317, intents=discord.Intents.all(), help_command=None)
 
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game("$도움말"))
     log("Logged in")
 
 
