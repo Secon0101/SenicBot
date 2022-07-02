@@ -1,4 +1,3 @@
-from pydoc import describe
 import discord
 from discord.ext import commands
 
@@ -8,14 +7,14 @@ class Bot(commands.Cog):
         self.bot = bot
     
     @commands.command(name="세닉봇", help="봇 정보를 보여줍니다.", usage="`$세닉봇`")
-    async def info(self, ctx: commands.Context):
+    async def cmd_bot_info(self, ctx: commands.Context):
         embed = discord.Embed(title="🔧 세닉봇", description="Since 2020. 9. 21.\nhttps://github.com/Secon0101/SenicBot \n기능은 `$도움말`을 참고하세요!", color=0x747f8d)
         embed.set_thumbnail(url=self.bot.user.avatar_url)
         embed.set_footer(text=f"Made by {self.bot.get_user(self.bot.owner_id)}", icon_url=self.bot.get_user(self.bot.owner_id).avatar_url)
         await ctx.send(embed=embed)
     
     @commands.command(name="도움말", help="봇에서 사용할 수 있는 명령어들을 보여줍니다.", usage="`$도움말 <카테고리>` 또는 `$도움말 <명령어>`", aliases=["명령어", "help"])
-    async def help(self, ctx: commands.Context, search: str = None):
+    async def cmd_help(self, ctx: commands.Context, search: str = None):
         embed = discord.Embed(title="🔧 세닉봇 도움말", description="접두사는 **`$`**입니다.", color=0x747f8d)
         embed.set_footer(text=self.bot.user.name, icon_url=self.bot.user.avatar_url)
         
@@ -24,7 +23,7 @@ class Bot(commands.Cog):
             for cog in self.bot.cogs:
                 commands = [cmd.name for cmd in self.bot.get_cog(cog).get_commands()]
                 if len(commands) > 0:
-                    embed.add_field(name=f"- {cog} 카테고리", value=' '.join(commands))
+                    embed.add_field(name=f"- {cog} 카테고리", value='\n'.join(commands))
             embed.description += f"\n`${ctx.command.name} <카테고리>`라고 입력하면 그 카테고리의 명령어들을 볼 수 있습니다."
         
         else:
