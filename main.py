@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from Events.console_chatting import console_chatting
 from utility import get_cogs, log
 
 
@@ -20,6 +21,14 @@ async def reload(ctx: commands.Context):
     log("Reloaded")
     await ctx.message.add_reaction("✅")
     await ctx.message.delete(delay=3)
+
+
+@bot.event
+async def on_message(msg: discord.Message):
+    if msg.author.bot: return
+    await bot.process_commands(msg)
+    
+    await console_chatting(bot, msg)
 
 
 if __name__ == "__main__":
