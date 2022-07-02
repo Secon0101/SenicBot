@@ -51,6 +51,20 @@ class Bot(commands.Cog):
                     return
         
         await ctx.send(embed=embed)
+    
+    @commands.command(name="닉네임", help="봇의 닉네임을 변경합니다.", usage="$닉네임 <새 닉네임 | None>")
+    async def cmd_nickname(self, ctx: commands.Context, nickname: str = None):
+        if nickname is None:
+            usage = self.bot.get_command("닉네임").usage
+            await ctx.send(f"닉네임을 입력하세요. `({usage})`")
+            
+        else:
+            if nickname == "None":
+                await ctx.guild.me.edit(nick=None)
+                await ctx.send(f"닉네임이 초기화되었습니다.")
+            else:
+                await ctx.guild.me.edit(nick=nickname)
+                await ctx.send(f"닉네임이 **<@{self.bot.user.id}>**(으)로 변경되었습니다.")
 
 
 def setup(bot):
