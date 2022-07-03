@@ -1,5 +1,6 @@
 import os
-from time import strftime
+from datetime import datetime
+from pytz import timezone
 
 
 def get_cogs() -> list[str]:
@@ -9,6 +10,7 @@ def get_cogs() -> list[str]:
             cogs.append(f"Cogs.{filename[:-3]}")
     return cogs
 
+
 def log(ctx: str):
-    time = strftime("%H:%M:%S")
+    time = datetime.now(timezone('Asia/Seoul')).strftime("%y/%m/%d %H:%M:%S")
     print(f"[{time}] {ctx}")
