@@ -1,7 +1,9 @@
 import discord
 from discord.ext import commands
 
+
 channel_id: int = None
+
 
 async def console_chatting(bot: commands.Bot, msg: discord.Message):
     if msg.channel.id == 796719890434097192:

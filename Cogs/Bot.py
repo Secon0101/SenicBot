@@ -6,12 +6,14 @@ class Bot(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
     
+    
     @commands.command(name="세닉봇", help="봇 정보를 보여줍니다.", usage="`$세닉봇`")
     async def cmd_bot_info(self, ctx: commands.Context):
         embed = discord.Embed(title="🔧 세닉봇", description="Since 2020. 9. 21.\nhttps://github.com/Secon0101/SenicBot \n기능은 `$도움말`을 참고하세요!", color=0x747f8d)
         embed.set_thumbnail(url=self.bot.user.avatar_url)
         embed.set_footer(text=f"Made by {self.bot.get_user(self.bot.owner_id)}", icon_url=self.bot.get_user(self.bot.owner_id).avatar_url)
         await ctx.send(embed=embed)
+    
     
     @commands.command(name="도움말", help="봇에서 사용할 수 있는 명령어들을 보여줍니다.", usage="`$도움말 <카테고리>` 또는 `$도움말 <명령어>`", aliases=["명령어", "help"])
     async def cmd_help(self, ctx: commands.Context, search: str = None):
@@ -51,6 +53,7 @@ class Bot(commands.Cog):
                     return
         
         await ctx.send(embed=embed)
+    
     
     @commands.command(name="닉네임", help="봇의 닉네임을 변경합니다.", usage="$닉네임 <새 닉네임 | None>")
     async def cmd_nickname(self, ctx: commands.Context, nickname: str = None):
